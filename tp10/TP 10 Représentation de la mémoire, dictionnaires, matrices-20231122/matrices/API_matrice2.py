@@ -5,13 +5,7 @@ matrice3 = [[2,7,6],[9,5,1],[4,3,8]]
 
 
 def construit_matrice(nb_lignes, nb_colonnes, valeur_par_defaut=0):
-    res = []
-    for _ in range(0, nb_lignes):
-        ligne = []
-        for _ in range(0, nb_colonnes):
-            ligne.append(valeur_par_defaut)
-        res.append(ligne)
-    return res
+    return [[valeur_par_defaut for _ in range(nb_colonnes)] for _ in range(nb_lignes)]
 
 def get_nb_lignes(matrice):
     return len(matrice)
@@ -35,35 +29,35 @@ def get_colonne(matrice, colonne):
     return col
 
 def get_diagonale_principale(matrice):
-    i = 0
-    j = 0
+    ligne = 0
+    colonne = 0
     diagonale = []
-    while len(diagonale) < len(matrice):
-        diagonale.append(matrice[i][j])
-        i += 1
-        j += 1
+    while get_nb_lignes(diagonale) < get_nb_lignes(matrice):
+        diagonale.append(get_val(matrice, ligne, colonne))
+        ligne += 1
+        colonne += 1
     return diagonale
 
 def get_diagonale_secondaire(matrice):
-    i = 0
-    j = len(matrice[0])-1
+    ligne = 0
+    colonne = get_nb_colonnes(matrice)-1
     diagonale = []
-    while len(diagonale) < len(matrice):
-        diagonale.append(matrice[i][j])
-        i += 1
-        j -= 1
+    while get_nb_lignes(diagonale) < get_nb_lignes(matrice):
+        diagonale.append(get_val(matrice, ligne, colonne))
+        ligne += 1
+        colonne -= 1
     return diagonale
 
 def transposee(matrice):
     transpose = []
-    for i in range(len(matrice[0])):
+    for i in range(get_nb_colonnes(matrice)):
         transpose.append(get_colonne(matrice, i))
     return transpose
 
 def is_triangulaire_inf(matrice):
     i = 1
-    for l in range(0, len(matrice)):
-        for elem in get_ligne(matrice, l)[i:]:
+    for ligne in range(get_nb_lignes(matrice)):
+        for elem in get_ligne(matrice, ligne)[i:]:
             i += 1
             if elem != 0:
                 return False
@@ -71,8 +65,8 @@ def is_triangulaire_inf(matrice):
 
 def is_triangulaire_sup(matrice):
     i = 1
-    for l in range(1, len(matrice)):
-        for elem in get_ligne(matrice, l)[:i]:
+    for ligne in range(1, get_nb_lignes(matrice)):
+        for elem in get_ligne(matrice, ligne)[:i]:
             i += 1
             if elem != 0:
                 return False
@@ -80,32 +74,32 @@ def is_triangulaire_sup(matrice):
 
 def bloc(matrice, ligne, colonne, hauteur, largeur):
     matrice_bloc = []
-    if ligne < 0 or colonne < 0 or ligne + hauteur > len(matrice) or colonne + largeur > len(matrice[0]): 
+    if ligne < 0 or colonne < 0 or ligne + hauteur > get_nb_lignes(matrice) or colonne + largeur > get_nb_colonnes(matrice): 
         return None
     for i in range(ligne, ligne + hauteur):
         ligne_matrice_bloc = []
         for j in range(colonne, colonne + largeur):
-            ligne_matrice_bloc.append(matrice[i][j])
+            ligne_matrice_bloc.append(get_val(matrice, i, j))
         matrice_bloc.append(ligne_matrice_bloc)
     return matrice_bloc
 
 def somme(matrice1, matrice2):
-    matrice_somme = [[0 for _ in range(len(matrice2[0]))] for _ in range(len(matrice1))]
+    matrice_somme = [[0 for _ in range(get_nb_colonnes(matrice2))] for _ in range(get_nb_lignes(matrice1))]
     if (get_nb_lignes(matrice1) != get_nb_lignes(matrice2)) or (get_nb_colonnes(matrice1) != get_nb_colonnes(matrice2)):
         return None
-    for i in range(len(matrice_somme)):
-        for j in range(len(matrice_somme[0])):
+    for i in range(get_nb_lignes(matrice_somme)):
+        for j in range(get_nb_colonnes(matrice_somme)):
             res = matrice1[i][j] + matrice2[i][j]
             set_val(matrice_somme, i, j, res)
     return matrice_somme
 
 def produit(matrice1, matrice2):
-    matrice_produit = [[0 for _ in range(len(matrice2[0]))] for _ in range(len(matrice1))]
-    for i in range(len(matrice1)):
-        for j in range(len(matrice2[0])):
+    matrice_produit = [[0 for _ in range(get_nb_colonnes(matrice2))] for _ in range(len(matrice1))]
+    for i in range(get_nb_lignes(matrice1)):
+        for j in range(get_nb_colonnes(matrice2)):
             res = 0
-            for k in range(len(matrice2)):
-                res += matrice1[i][k] * matrice2[k][j]
+            for k in range(get_nb_lignes(matrice2)):
+                res += get_val(matrice1, i, k) * get_val(matrice2, k, j)
             set_val(matrice_produit, i, j, res)
     return matrice_produit
 
