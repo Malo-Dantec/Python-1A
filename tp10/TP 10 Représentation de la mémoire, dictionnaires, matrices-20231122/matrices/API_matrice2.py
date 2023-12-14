@@ -89,17 +89,17 @@ def somme(matrice1, matrice2):
         return None
     for ligne in range(get_nb_lignes(matrice_somme)):
         for colonne in range(get_nb_colonnes(matrice_somme)):
-            res = get_val(matrice1, ligne, colonne) + get_val(matrice2, ligne, colonne)
-            set_val(matrice_somme, ligne, colonne, res)
+            somme = get_val(matrice1, ligne, colonne) + get_val(matrice2, ligne, colonne)
+            set_val(matrice_somme, ligne, colonne, somme)
     return matrice_somme
 
 def produit(matrice1, matrice2):
     matrice_produit = [[0 for _ in range(get_nb_colonnes(matrice2))] for _ in range(get_nb_lignes(matrice1))]
     for i in range(get_nb_lignes(matrice1)):
         for j in range(get_nb_colonnes(matrice2)):
-            res = 0
+            produit = 0
             for k in range(get_nb_lignes(matrice2)):
-                res += get_val(matrice1, i, k) * get_val(matrice2, k, j)
-            set_val(matrice_produit, i, j, res)
+                produit += get_val(matrice1, i, k) * get_val(matrice2, k, j)
+            set_val(matrice_produit, i, j, produit)
     return matrice_produit
 
