@@ -20,7 +20,7 @@ def affiche_menu2():
           plateau.EST+":EST\n "+
           plateau.SUD+":SUD\n "+
           plateau.OUEST+":OUEST\n")
-    #test
+
 
 
 def affiche_jeu(le_plateau, affichage_graphique=None):
