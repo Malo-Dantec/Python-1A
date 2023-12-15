@@ -105,7 +105,7 @@ def produit(matrice1, matrice2):
 
 def colle_sous_matrice(matrice, sous_matrice, ligne, colonne):
     i = 0
-    for l in range(ligne, get_nb_lignes(sous_matrice)):
+    for l in range(ligne, get_nb_lignes(sous_matrice) + ligne):
         j = 0
         for c in range(colonne, get_nb_colonnes(sous_matrice)):
             set_val(matrice, l, c, get_val(sous_matrice, i, j))
