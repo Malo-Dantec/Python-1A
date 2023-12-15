@@ -3,3 +3,7 @@ cd Python-1A/
 git add .
 git commit -m 'crampte'
 git push
+
+
+git config --global user.name "Malo Dantec"
+git config --global user.email mdantec56@gmail.com
