@@ -95,12 +95,12 @@ def somme(matrice1, matrice2):
 
 def produit(matrice1, matrice2):
     matrice_produit = [[0 for _ in range(get_nb_colonnes(matrice2))] for _ in range(get_nb_lignes(matrice1))]
-    for i in range(get_nb_lignes(matrice1)):
-        for j in range(get_nb_colonnes(matrice2)):
+    for ligne in range(get_nb_lignes(matrice1)):
+        for colonne in range(get_nb_colonnes(matrice2)):
             produit = 0
             for k in range(get_nb_lignes(matrice2)):
-                produit += get_val(matrice1, i, k) * get_val(matrice2, k, j)
-            set_val(matrice_produit, i, j, produit)
+                produit += get_val(matrice1, ligne, k) * get_val(matrice2, k, colonne)
+            set_val(matrice_produit, ligne, colonne, produit)
     return matrice_produit
 
 def colle_sous_matrice(matrice, sous_matrice, ligne, colonne):
