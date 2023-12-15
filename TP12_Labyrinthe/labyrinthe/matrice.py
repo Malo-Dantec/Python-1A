@@ -17,7 +17,13 @@ def new_matrice(nb_lignes, nb_colonnes, valeur_par_defaut=0):
                  est nb_colonnes
         et dont toutes les valeurs sont à valeur_par_defaut
     """
-    ...
+    matrice = {}
+    for ligne in range(nb_lignes):
+        for colonne in range(nb_colonnes):
+            matrice[ligne, colonne] = valeur_par_defaut
+    return nb_lignes, nb_colonnes, matrice
+
+print(new_matrice(2, 2, 2))
 
 def get_nb_lignes(matrice):
     """renvoie le nombre de lignes de la matrice
@@ -29,7 +35,7 @@ def get_nb_lignes(matrice):
     Returns:
         int: le nombre de lignes de la matrice
     """
-    ...
+    return matrice[0]
 
 def get_nb_colonnes(matrice):
     """renvoie le nombre de colonnes de la matrice
@@ -41,7 +47,7 @@ def get_nb_colonnes(matrice):
     Returns:
         int: le nombre de colonnes de la matrice
     """
-    ...
+    return matrice[1]
 
 def get_val(matrice, ligne, colonne):
     """renvoie une valeur de la matrice
@@ -55,7 +61,9 @@ def get_val(matrice, ligne, colonne):
         variable: le contenu de la case de la matrice qui se trouve à la ligne
         numéro ligne et à la colonne numéro colonne
     """
-    ...
+    return matrice[2][ligne, colonne]
+
+print(get_val((2, 2, {(0, 0): 2, (0, 1): 2, (1, 0): 2, (1, 1): 2}), 1, 1))
 
 def set_val(matrice, ligne, colonne, new_val):
     """modifie le contenu de la case de la matrice qui se trouve à la ligne
@@ -69,7 +77,8 @@ def set_val(matrice, ligne, colonne, new_val):
     Returns:
         None
     """
-    ...
+    matrice[2][ligne, colonne] = new_val
+
 
 def affiche(matrice):
     """Affiche la matrice sur la sortie standard
