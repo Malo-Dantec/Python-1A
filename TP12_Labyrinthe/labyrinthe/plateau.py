@@ -29,7 +29,7 @@ def init(nom_fichier="./labyrinthe1.txt"):
     Returns:
         le plateau de jeu avec les MUR, COULOIR, PERSONNAGE et FANTOME
     """
-    ma_matrice = matrice.charge_matrice(nom_fichier, type_valeur=int)
+    ma_matrice = matrice.charge_matrice(nom_fichier, 'int')
     matrice.set_val(ma_matrice, 0, 0, PERSONNAGE)
     matrice.set_val(ma_matrice, matrice.get_nb_lignes(ma_matrice)-1, matrice.get_nb_colonnes(ma_matrice)-1, FANTOME)
     return ma_matrice
@@ -61,7 +61,9 @@ def get(le_plateau, position):
         int: la valeur de la case qui se trouve à la position donnée ou
              None si la position n'est pas sur le plateau
     """
-    # return int(matrice.get_val(le_plateau, position[0], position[1]))
+    if est_sur_le_plateau(le_plateau, position):
+        return matrice.get_val(le_plateau, position[0], position[1])
+    return None
 
 
 def est_un_mur(le_plateau, position):
@@ -74,7 +76,9 @@ def est_un_mur(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est un MUR, False sinon
     """
-    ...
+    if get(le_plateau, position) == MUR:
+        return True
+    return False
 
 
 def contient_fantome(le_plateau, position):
@@ -87,7 +91,9 @@ def contient_fantome(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est un FANTOME, False sinon
     """
-    ...
+    if get(le_plateau, position) == FANTOME:
+        return True
+    return False
 
 def est_la_sortie(le_plateau, position):
     """Détermine si la position donnée est la sortie
@@ -100,7 +106,9 @@ def est_la_sortie(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est la sortie, False sinon
     """
-    ...
+    if get(le_plateau, position) == '':
+        return True
+    return False
 
 
 def deplace_personnage(le_plateau, personnage, direction):

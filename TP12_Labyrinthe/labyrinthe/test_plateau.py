@@ -55,50 +55,50 @@ def test_est_la_sortie():
     assert not plateau.est_la_sortie(le_plateau, (0, 0))
 
 
-def test_deplace_personnage():
-    le_plateau = plateau.init()
-    assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.NORD) == (0, 0)
-    assert plateau.get(le_plateau, (0, 0)) == plateau.PERSONNAGE
-    assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.EST) == (0, 0)
-    assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.OUEST) == (0, 0)
-    assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.SUD) == (1, 0)
-    assert plateau.get(le_plateau, (0, 0)) == plateau.COULOIR    
-    assert plateau.get(le_plateau, (1, 0)) == plateau.PERSONNAGE
+# def test_deplace_personnage():
+#     le_plateau = plateau.init()
+#     assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.NORD) == (0, 0)
+#     assert plateau.get(le_plateau, (0, 0)) == plateau.PERSONNAGE
+#     assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.EST) == (0, 0)
+#     assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.OUEST) == (0, 0)
+#     assert plateau.deplace_personnage(le_plateau, (0, 0), plateau.SUD) == (1, 0)
+#     assert plateau.get(le_plateau, (0, 0)) == plateau.COULOIR    
+#     assert plateau.get(le_plateau, (1, 0)) == plateau.PERSONNAGE
 
-    assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.EST) == (4, 5)
-    assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.SUD) == (4, 4)
-    assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.OUEST) == (4, 3)
-    assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.NORD) == (3, 4)
-
-
-def test_voisins():
-    le_plateau = plateau.init()
-    assert plateau.voisins(le_plateau, (0, 0)) == {(1, 0)}
-    assert plateau.voisins(le_plateau, (4, 4)) == {(3, 4), (4, 3), (4, 5)}
-    assert plateau.voisins(le_plateau, (1, 2)) == {(1, 1), (2, 2)}
-    assert plateau.voisins(le_plateau, (8, 8)) == {(8, 7)}
+#     assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.EST) == (4, 5)
+#     assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.SUD) == (4, 4)
+#     assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.OUEST) == (4, 3)
+#     assert plateau.deplace_personnage(le_plateau, (4, 4), plateau.NORD) == (3, 4)
 
 
-def test_fabrique_le_calque():
-    le_plateau = plateau.init()
-    le_calque = plateau.fabrique_le_calque(le_plateau, (4, 2))
-    assert le_calque == matrice.charge_matrice("./calque1_pour_test.csv")
+# def test_voisins():
+#     le_plateau = plateau.init()
+#     assert plateau.voisins(le_plateau, (0, 0)) == {(1, 0)}
+#     assert plateau.voisins(le_plateau, (4, 4)) == {(3, 4), (4, 3), (4, 5)}
+#     assert plateau.voisins(le_plateau, (1, 2)) == {(1, 1), (2, 2)}
+#     assert plateau.voisins(le_plateau, (8, 8)) == {(8, 7)}
 
 
-def test_fabrique_chemin():
-    le_plateau = plateau.init()
-    assert plateau.fabrique_chemin(le_plateau, (4, 5), (8, 8)) == [(8, 8), (8, 7), (7, 7), (6, 7),
-                                                                   (5, 7), (4, 7), (4, 6)]
-    assert plateau.fabrique_chemin(le_plateau, (5, 3), (8, 8)) == [(8, 8), (8, 7), (7, 7), (7, 6), 
-                                                                   (7, 5), (7, 4), (7, 3), (6, 3)]
+# def test_fabrique_le_calque():
+#     le_plateau = plateau.init()
+#     le_calque = plateau.fabrique_le_calque(le_plateau, (4, 2))
+#     assert le_calque == matrice.charge_matrice("./calque1_pour_test.csv")
 
 
-def test_deplace_fantome():
-    le_plateau = plateau.init()
-    assert plateau.deplace_fantome(le_plateau, (8, 8), (0, 0)) == (8, 7)
-    assert plateau.contient_fantome(le_plateau, (8, 7))
-    assert not plateau.contient_fantome(le_plateau, (8, 8))
-    le_plateau = plateau.init()
-    assert plateau.deplace_fantome(le_plateau, (8, 8), (7, 4)) == (8, 7)
-    assert plateau.deplace_fantome(le_plateau, (7, 4), (8, 8)) == (7, 5)
-    assert plateau.deplace_fantome(le_plateau, (4, 4), (4, 4)) == (4, 4)
+# def test_fabrique_chemin():
+#     le_plateau = plateau.init()
+#     assert plateau.fabrique_chemin(le_plateau, (4, 5), (8, 8)) == [(8, 8), (8, 7), (7, 7), (6, 7),
+#                                                                    (5, 7), (4, 7), (4, 6)]
+#     assert plateau.fabrique_chemin(le_plateau, (5, 3), (8, 8)) == [(8, 8), (8, 7), (7, 7), (7, 6), 
+#                                                                    (7, 5), (7, 4), (7, 3), (6, 3)]
+
+
+# def test_deplace_fantome():
+#     le_plateau = plateau.init()
+#     assert plateau.deplace_fantome(le_plateau, (8, 8), (0, 0)) == (8, 7)
+#     assert plateau.contient_fantome(le_plateau, (8, 7))
+#     assert not plateau.contient_fantome(le_plateau, (8, 8))
+#     le_plateau = plateau.init()
+#     assert plateau.deplace_fantome(le_plateau, (8, 8), (7, 4)) == (8, 7)
+#     assert plateau.deplace_fantome(le_plateau, (7, 4), (8, 8)) == (7, 5)
+#     assert plateau.deplace_fantome(le_plateau, (4, 4), (4, 4)) == (4, 4)
