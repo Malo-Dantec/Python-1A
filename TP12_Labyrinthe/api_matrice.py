@@ -12,9 +12,9 @@ def creer_matrice(ligne, colonne):
         _type_: 
     """    
     matrice = []
-    for i in range(ligne):
+    for _ in range(ligne):
         ligne_matrice = []
-        for j in range(colonne):
+        for _ in range(colonne):
             ligne_matrice.append(random.randint(0, 100))
         matrice.append(ligne_matrice)
     return matrice
