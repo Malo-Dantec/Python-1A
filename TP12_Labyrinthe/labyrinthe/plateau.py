@@ -98,7 +98,7 @@ def contient_fantome(le_plateau, position):
 def est_la_sortie(le_plateau, position):
     """Détermine si la position donnée est la sortie
        cad la case en bas à droite du labyrinthe
-
+d
     Args:
         le_plateau (plateau): un plateau de jeu
         position (tuple): un tuple de deux entiers de la forme (no_ligne, no_colonne) 
@@ -106,10 +106,13 @@ def est_la_sortie(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est la sortie, False sinon
     """
-    if get(le_plateau, position) == '':
+
+    pos_sortie = max(le_plateau.keys())
+    print(pos_sortie)
+    if get(le_plateau, position) == pos_sortie:
         return True
     return False
-
+print(est_la_sortie())
 
 def deplace_personnage(le_plateau, personnage, direction):
     """déplace le PERSONNAGE sur le plateau si le déplacement est valide
