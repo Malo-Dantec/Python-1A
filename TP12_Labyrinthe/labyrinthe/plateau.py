@@ -29,7 +29,7 @@ def init(nom_fichier="./labyrinthe1.txt"):
     Returns:
         le plateau de jeu avec les MUR, COULOIR, PERSONNAGE et FANTOME
     """
-    ma_matrice = matrice.charge_matrice(nom_fichier, 'int')
+    ma_matrice = matrice.charge_matrice(nom_fichier, type_valeur='int')
     matrice.set_val(ma_matrice, 0, 0, PERSONNAGE)
     matrice.set_val(ma_matrice, matrice.get_nb_lignes(ma_matrice)-1, matrice.get_nb_colonnes(ma_matrice)-1, FANTOME)
     return ma_matrice
@@ -107,12 +107,11 @@ d
         bool: True si la case à la position donnée est la sortie, False sinon
     """
 
-    pos_sortie = max(le_plateau.keys())
-    print(pos_sortie)
-    if get(le_plateau, position) == pos_sortie:
+    pos_sortie = (matrice.get_nb_lignes(le_plateau)-1, matrice.get_nb_colonnes(le_plateau)-1)
+    if position == pos_sortie:
         return True
     return False
-print(est_la_sortie())
+
 
 def deplace_personnage(le_plateau, personnage, direction):
     """déplace le PERSONNAGE sur le plateau si le déplacement est valide
