@@ -102,7 +102,7 @@ def contient_fantome(le_plateau, position):
 def est_la_sortie(le_plateau, position):
     """Détermine si la position donnée est la sortie
        cad la case en bas à droite du labyrinthe
-d
+
     Args:
         le_plateau (plateau): un plateau de jeu
         position (tuple): un tuple de deux entiers de la forme (no_ligne, no_colonne) 
@@ -199,13 +199,9 @@ def fabrique_le_calque(le_plateau, position_depart):
                     changement = True
         nombre += 1
     return calque
+
 print()
-print()
-print()
-print()
-print()
-print()
-# print(fabrique_le_calque(dico_matrice, (4, 2)))
+print(fabrique_le_calque(dico_matrice, (4, 2)))
 print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
 
 
