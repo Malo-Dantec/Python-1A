@@ -16,6 +16,8 @@ OUEST = 'q'
 SUD = 'w'
 EST = 's'
 
+dico_matrice = (9, 9, {(0, 0): 2, (0, 1): 1, (0, 2): 1, (0, 3): 1, (0, 4): 1, (0, 5): 1, (0, 6): 1, (0, 7): 1, (0, 8): 1, (1, 0): 0, (1, 1): 0, (1, 2): 0, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1, (1, 7): 1, (1, 8): 1, (2, 0): 1, (2, 1): 1, (2, 2): 0, (2, 3): 1, (2, 4): 0, (2, 5): 0, (2, 6): 0, (2, 7): 0, (2, 8): 1, (3, 0): 1, (3, 1): 1, (3, 2): 0, (3, 3): 1, (3, 4): 0, (3, 5): 1, (3, 6): 1, (3, 7): 0, (3, 8): 1, (4, 0): 1, (4, 1): 1, (4, 2): 0, (4, 3): 0, (4, 4): 0, (4, 5): 0, (4, 6): 0, (4, 7): 0, (4, 8): 1, (5, 0): 1, (5, 1): 1, (5, 2): 1, (5, 3): 0, (5, 4): 1, (5, 5): 1, (5, 6): 1, (5, 7): 0, (5, 8): 1, (6, 0): 1, (6, 1): 1, (6, 2): 1, (6, 3): 0, (6, 4): 1, (6, 5): 1, (6, 6): 1, (6, 7): 0, (6, 8): 1, (7, 0): 1, (7, 1): 1, (7, 2): 1, (7, 3): 0, (7, 4): 0, (7, 5): 0, (7, 6): 0, (7, 7): 0, (7, 8): 1, (8, 0): 1, (8, 1): 1, (8, 2): 1, (8, 3): 1, (8, 4): 1, (8, 5): 1, (8, 6): 1, (8, 7): 0, (8, 8): 3})
+
 
 def init(nom_fichier="./labyrinthe1.txt"):
     """Construit le plateau de jeu de la façon suivante :
@@ -107,7 +109,7 @@ d
         bool: True si la case à la position donnée est la sortie, False sinon
     """
 
-    pos_sortie = (matrice.get_nb_lignes(le_plateau)-1, matrice.get_nb_colonnes(le_plateau)-1)
+    pos_sortie = (le_plateau[0]-1, le_plateau[1]-1)
     if position == pos_sortie:
         return True
     return False
@@ -126,7 +128,31 @@ def deplace_personnage(le_plateau, personnage, direction):
     Returns:
         [tuple]: la nouvelle position du personnage
     """
-    ...
+    nouvelle_pos = personnage
+    
+    if direction == SUD:
+        if est_sur_le_plateau(le_plateau, (personnage[0] + 1, personnage[1])) and not est_un_mur(le_plateau, (personnage[0] + 1, personnage[1])):
+            nouvelle_pos = (personnage[0] + 1, personnage[1])
+            
+    elif direction == EST:
+        if est_sur_le_plateau(le_plateau, (personnage[0], personnage[1] + 1)) and not est_un_mur(le_plateau, (personnage[0], personnage[1] + 1)):
+            nouvelle_pos = (personnage[0], personnage[1] + 1)
+            
+    elif direction == NORD:
+        if est_sur_le_plateau(le_plateau, (personnage[0] - 1, personnage[1])) and not est_un_mur(le_plateau, (personnage[0] - 1, personnage[1])):
+            nouvelle_pos = (personnage[0] - 1, personnage[1])
+            
+    elif direction == OUEST:
+        if est_sur_le_plateau(le_plateau, (personnage[0], personnage[1] - 1)) and not est_un_mur(le_plateau, (personnage[0], personnage[1] - 1)):
+            nouvelle_pos = (personnage[0], personnage[1] - 1)
+            
+
+    matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+    matrice.set_val(le_plateau, nouvelle_pos[0], nouvelle_pos[1], PERSONNAGE)
+    
+    return nouvelle_pos
+
+print(deplace_personnage((9, 9, {(0, 0): 2, (0, 1): 1, (0, 2): 1, (0, 3): 1, (0, 4): 1, (0, 5): 1, (0, 6): 1, (0, 7): 1, (0, 8): 1, (1, 0): 0, (1, 1): 0, (1, 2): 0, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1, (1, 7): 1, (1, 8): 1, (2, 0): 1, (2, 1): 1, (2, 2): 0, (2, 3): 1, (2, 4): 0, (2, 5): 0, (2, 6): 0, (2, 7): 0, (2, 8): 1, (3, 0): 1, (3, 1): 1, (3, 2): 0, (3, 3): 1, (3, 4): 0, (3, 5): 1, (3, 6): 1, (3, 7): 0, (3, 8): 1, (4, 0): 1, (4, 1): 1, (4, 2): 0, (4, 3): 0, (4, 4): 0, (4, 5): 0, (4, 6): 0, (4, 7): 0, (4, 8): 1, (5, 0): 1, (5, 1): 1, (5, 2): 1, (5, 3): 0, (5, 4): 1, (5, 5): 1, (5, 6): 1, (5, 7): 0, (5, 8): 1, (6, 0): 1, (6, 1): 1, (6, 2): 1, (6, 3): 0, (6, 4): 1, (6, 5): 1, (6, 6): 1, (6, 7): 0, (6, 8): 1, (7, 0): 1, (7, 1): 1, (7, 2): 1, (7, 3): 0, (7, 4): 0, (7, 5): 0, (7, 6): 0, (7, 7): 0, (7, 8): 1, (8, 0): 1, (8, 1): 1, (8, 2): 1, (8, 3): 1, (8, 4): 1, (8, 5): 1, (8, 6): 1, (8, 7): 0, (8, 8): 3}), (0, 0), SUD))
 
 
 def voisins(le_plateau, position):
