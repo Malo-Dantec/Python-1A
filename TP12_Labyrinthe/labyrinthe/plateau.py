@@ -168,6 +168,14 @@ def voisins(le_plateau, position):
     """
     return set(pos for pos in [(position[0] + 1, position[1]), (position[0] - 1, position[1]), (position[0], position[1]+1), (position[0], position[1]-1)] if position_valide(le_plateau, pos))
 
+
+def valeur_couloir(le_plateau):
+    cpt = 0
+    for nombre in le_plateau.values():
+        if nombre == 0:
+            cpt += 1
+    return cpt
+
 def fabrique_le_calque(le_plateau, position_depart):
     """fabrique le calque d'un labyrinthe en utilisation le principe de l'inondation :
        
@@ -180,7 +188,11 @@ def fabrique_le_calque(le_plateau, position_depart):
        position_de_depart est à 0 les autres cases contiennent la longueur du
        plus court chemin pour y arriver (les murs et les cases innaccessibles sont à None)
     """
-    
+    calque = matrice.new_matrice(matrice.get_nb_lignes(le_plateau), matrice.get_nb_colonnes(le_plateau), None)
+    matrice.set_val(calque, position_depart[0], position_depart[1], 0)
+    nombre_de_couloir = valeur_couloir(le_plateau)
+    return calque
+print(fabrique_le_calque(dico_matrice, (0, 0)))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
