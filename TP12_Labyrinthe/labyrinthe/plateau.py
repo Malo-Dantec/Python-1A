@@ -206,7 +206,7 @@ print()
 print()
 print()
 # print(fabrique_le_calque(dico_matrice, (4, 2)))
-# print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
+print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
