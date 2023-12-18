@@ -35,7 +35,7 @@ def init(nom_fichier="./labyrinthe1.txt"):
     matrice.set_val(ma_matrice, 0, 0, PERSONNAGE)
     matrice.set_val(ma_matrice, matrice.get_nb_lignes(ma_matrice)-1, matrice.get_nb_colonnes(ma_matrice)-1, FANTOME)
     return ma_matrice
-print(init())
+print(matrice.affiche(init()))
 
 
 def est_sur_le_plateau(le_plateau, position):
@@ -201,7 +201,7 @@ def fabrique_le_calque(le_plateau, position_depart):
     return calque
 
 print()
-print(fabrique_le_calque(dico_matrice, (4, 2)))
+# print(fabrique_le_calque(dico_matrice, (4, 2)))
 print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
 
 
