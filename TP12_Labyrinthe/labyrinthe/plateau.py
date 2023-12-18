@@ -115,6 +115,24 @@ d
     return False
 
 
+def position_valide(le_plateau, position):
+    return est_sur_le_plateau(le_plateau, position) and not est_un_mur(le_plateau, position)
+          
+
+def position_direction(le_plateau, position, direction):
+    if direction == SUD and position_valide(le_plateau, (position[0] + 1, position[1])):
+        return (position[0] + 1, position[1])
+    elif direction == EST and position_valide(le_plateau, (position[0], position[1] + 1)):
+        return (position[0], position[1] + 1)
+    elif direction == NORD and position_valide(le_plateau, (position[0] - 1, position[1])):
+        return (position[0] - 1, position[1])
+    elif direction == OUEST and position_valide(le_plateau, (position[0], position[1] - 1)):
+        return (position[0], position[1] - 1)
+
+def direction_valide(le_plateau, position, direction):
+    return position_valide(le_plateau, position_direction(le_plateau, position, direction))
+          
+
 def deplace_personnage(le_plateau, personnage, direction):
     """déplace le PERSONNAGE sur le plateau si le déplacement est valide
        Le personnage ne peut pas sortir du plateau ni traverser les murs
@@ -129,27 +147,10 @@ def deplace_personnage(le_plateau, personnage, direction):
         [tuple]: la nouvelle position du personnage
     """
     nouvelle_pos = personnage
-    
-    if direction == SUD:
-        if est_sur_le_plateau(le_plateau, (personnage[0] + 1, personnage[1])) and not est_un_mur(le_plateau, (personnage[0] + 1, personnage[1])):
-            nouvelle_pos = (personnage[0] + 1, personnage[1])
-            
-    elif direction == EST:
-        if est_sur_le_plateau(le_plateau, (personnage[0], personnage[1] + 1)) and not est_un_mur(le_plateau, (personnage[0], personnage[1] + 1)):
-            nouvelle_pos = (personnage[0], personnage[1] + 1)
-            
-    elif direction == NORD:
-        if est_sur_le_plateau(le_plateau, (personnage[0] - 1, personnage[1])) and not est_un_mur(le_plateau, (personnage[0] - 1, personnage[1])):
-            nouvelle_pos = (personnage[0] - 1, personnage[1])
-            
-    elif direction == OUEST:
-        if est_sur_le_plateau(le_plateau, (personnage[0], personnage[1] - 1)) and not est_un_mur(le_plateau, (personnage[0], personnage[1] - 1)):
-            nouvelle_pos = (personnage[0], personnage[1] - 1)
-            
-
+    if direction_valide(le_plateau, personnage, direction):
+        nouvelle_pos = position_direction(le_plateau, personnage, direction)
     matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
     matrice.set_val(le_plateau, nouvelle_pos[0], nouvelle_pos[1], PERSONNAGE)
-    
     return nouvelle_pos
 
 print(deplace_personnage((9, 9, {(0, 0): 2, (0, 1): 1, (0, 2): 1, (0, 3): 1, (0, 4): 1, (0, 5): 1, (0, 6): 1, (0, 7): 1, (0, 8): 1, (1, 0): 0, (1, 1): 0, (1, 2): 0, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1, (1, 7): 1, (1, 8): 1, (2, 0): 1, (2, 1): 1, (2, 2): 0, (2, 3): 1, (2, 4): 0, (2, 5): 0, (2, 6): 0, (2, 7): 0, (2, 8): 1, (3, 0): 1, (3, 1): 1, (3, 2): 0, (3, 3): 1, (3, 4): 0, (3, 5): 1, (3, 6): 1, (3, 7): 0, (3, 8): 1, (4, 0): 1, (4, 1): 1, (4, 2): 0, (4, 3): 0, (4, 4): 0, (4, 5): 0, (4, 6): 0, (4, 7): 0, (4, 8): 1, (5, 0): 1, (5, 1): 1, (5, 2): 1, (5, 3): 0, (5, 4): 1, (5, 5): 1, (5, 6): 1, (5, 7): 0, (5, 8): 1, (6, 0): 1, (6, 1): 1, (6, 2): 1, (6, 3): 0, (6, 4): 1, (6, 5): 1, (6, 6): 1, (6, 7): 0, (6, 8): 1, (7, 0): 1, (7, 1): 1, (7, 2): 1, (7, 3): 0, (7, 4): 0, (7, 5): 0, (7, 6): 0, (7, 7): 0, (7, 8): 1, (8, 0): 1, (8, 1): 1, (8, 2): 1, (8, 3): 1, (8, 4): 1, (8, 5): 1, (8, 6): 1, (8, 7): 0, (8, 8): 3}), (0, 0), SUD))
@@ -165,8 +166,7 @@ def voisins(le_plateau, position):
     Returns:
         set: l'ensemble des positions des cases voisines accessibles
     """
-    ...
-
+    return set(pos for pos in [(position[0] + 1, position[1]), (position[0] - 1, position[1]), (position[0], position[1]+1), (position[0], position[1]-1)] if position_valide(le_plateau, pos))
 
 def fabrique_le_calque(le_plateau, position_depart):
     """fabrique le calque d'un labyrinthe en utilisation le principe de l'inondation :
@@ -180,7 +180,7 @@ def fabrique_le_calque(le_plateau, position_depart):
        position_de_depart est à 0 les autres cases contiennent la longueur du
        plus court chemin pour y arriver (les murs et les cases innaccessibles sont à None)
     """
-    ...
+    
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
