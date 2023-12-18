@@ -37,6 +37,7 @@ def init(nom_fichier="./labyrinthe1.txt"):
     return ma_matrice
 print(init())
 
+
 def est_sur_le_plateau(le_plateau, position):
     """Indique si la position est bien sur le plateau
 
@@ -97,6 +98,7 @@ def contient_fantome(le_plateau, position):
         return True
     return False
 
+
 def est_la_sortie(le_plateau, position):
     """Détermine si la position donnée est la sortie
        cad la case en bas à droite du labyrinthe
@@ -129,6 +131,7 @@ def position_direction(le_plateau, position, direction):
     elif direction == OUEST and position_valide(le_plateau, (position[0], position[1] - 1)):
         return (position[0], position[1] - 1)
 
+
 def direction_valide(le_plateau, position, direction):
     return position_valide(le_plateau, position_direction(le_plateau, position, direction))
           
@@ -153,8 +156,6 @@ def deplace_personnage(le_plateau, personnage, direction):
     matrice.set_val(le_plateau, nouvelle_pos[0], nouvelle_pos[1], PERSONNAGE)
     return nouvelle_pos
 
-print(deplace_personnage((9, 9, {(0, 0): 2, (0, 1): 1, (0, 2): 1, (0, 3): 1, (0, 4): 1, (0, 5): 1, (0, 6): 1, (0, 7): 1, (0, 8): 1, (1, 0): 0, (1, 1): 0, (1, 2): 0, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1, (1, 7): 1, (1, 8): 1, (2, 0): 1, (2, 1): 1, (2, 2): 0, (2, 3): 1, (2, 4): 0, (2, 5): 0, (2, 6): 0, (2, 7): 0, (2, 8): 1, (3, 0): 1, (3, 1): 1, (3, 2): 0, (3, 3): 1, (3, 4): 0, (3, 5): 1, (3, 6): 1, (3, 7): 0, (3, 8): 1, (4, 0): 1, (4, 1): 1, (4, 2): 0, (4, 3): 0, (4, 4): 0, (4, 5): 0, (4, 6): 0, (4, 7): 0, (4, 8): 1, (5, 0): 1, (5, 1): 1, (5, 2): 1, (5, 3): 0, (5, 4): 1, (5, 5): 1, (5, 6): 1, (5, 7): 0, (5, 8): 1, (6, 0): 1, (6, 1): 1, (6, 2): 1, (6, 3): 0, (6, 4): 1, (6, 5): 1, (6, 6): 1, (6, 7): 0, (6, 8): 1, (7, 0): 1, (7, 1): 1, (7, 2): 1, (7, 3): 0, (7, 4): 0, (7, 5): 0, (7, 6): 0, (7, 7): 0, (7, 8): 1, (8, 0): 1, (8, 1): 1, (8, 2): 1, (8, 3): 1, (8, 4): 1, (8, 5): 1, (8, 6): 1, (8, 7): 0, (8, 8): 3}), (0, 0), SUD))
-
 
 def voisins(le_plateau, position):
     """Renvoie l'ensemble des positions cases voisines accessibles de la position renseignées
@@ -169,12 +170,9 @@ def voisins(le_plateau, position):
     return set(pos for pos in [(position[0] + 1, position[1]), (position[0] - 1, position[1]), (position[0], position[1]+1), (position[0], position[1]-1)] if position_valide(le_plateau, pos))
 
 
-def valeur_couloir(le_plateau):
-    cpt = 0
-    for nombre in le_plateau.values():
-        if nombre == 0:
-            cpt += 1
-    return cpt
+def pos_par_valeur(le_plateau, valeur):
+    return set(pos for pos in le_plateau[2].keys() if le_plateau[2][pos] == valeur)
+
 
 def fabrique_le_calque(le_plateau, position_depart):
     """fabrique le calque d'un labyrinthe en utilisation le principe de l'inondation :
@@ -190,9 +188,25 @@ def fabrique_le_calque(le_plateau, position_depart):
     """
     calque = matrice.new_matrice(matrice.get_nb_lignes(le_plateau), matrice.get_nb_colonnes(le_plateau), None)
     matrice.set_val(calque, position_depart[0], position_depart[1], 0)
-    nombre_de_couloir = valeur_couloir(le_plateau)
+    nombre = 0
+    changement = True
+    while changement:
+        changement = False
+        for pos in pos_par_valeur(calque, nombre):
+            for voisin in voisins(calque, pos):
+                if position_valide(le_plateau, voisin) and get(calque, voisin) is None:
+                    matrice.set_val(calque, voisin[0], voisin[1], get(calque, pos) + 1)
+                    changement = True
+        nombre += 1
     return calque
-print(fabrique_le_calque(dico_matrice, (0, 0)))
+print()
+print()
+print()
+print()
+print()
+print()
+# print(fabrique_le_calque(dico_matrice, (4, 2)))
+# print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):

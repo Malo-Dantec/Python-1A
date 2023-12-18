@@ -79,10 +79,10 @@ def test_voisins():
     assert plateau.voisins(le_plateau, (8, 8)) == {(8, 7)}
 
 
-# def test_fabrique_le_calque():
-#     le_plateau = plateau.init()
-#     le_calque = plateau.fabrique_le_calque(le_plateau, (4, 2))
-#     assert le_calque == matrice.charge_matrice("./calque1_pour_test.csv")
+def test_fabrique_le_calque():
+    le_plateau = plateau.init()
+    le_calque = plateau.fabrique_le_calque(le_plateau, (4, 2))
+    assert le_calque == matrice.charge_matrice("./calque1_pour_test.csv")
 
 
 # def test_fabrique_chemin():
