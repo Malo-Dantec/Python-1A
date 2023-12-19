@@ -202,7 +202,7 @@ def fabrique_le_calque(le_plateau, position_depart):
 
 print()
 # print(fabrique_le_calque(dico_matrice, (4, 2)))
-print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
+# print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
@@ -217,8 +217,21 @@ def fabrique_chemin(le_plateau, position_depart, position_arrivee):
         list: Une liste de positions entre position_arrivee et position_depart
         qui représente un plus court chemin entre les deux positions
     """
-    ...
+    pos = position_arrivee
+    calque = fabrique_le_calque(le_plateau, position_depart)
+    print(calque)
+    chemin = []
+    while pos != position_depart:
+        chemin.append(pos)
+        # print("a")
+        for voisin in voisins(calque, pos):
+            print(voisin)
+            if get(calque, voisin) == get(calque, pos) - 1:
+                pos = voisin
+                # print("c")
+    return chemin
 
+print(fabrique_chemin(dico_matrice, (4, 2), (8, 8)))
 
 def deplace_fantome(le_plateau, fantome, personnage):
     """déplace le FANTOME sur le plateau vers le personnage en prenant le chemin le plus court
