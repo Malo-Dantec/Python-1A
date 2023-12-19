@@ -173,6 +173,17 @@ def voisins(le_plateau, position):
     """
     return set(pos for pos in [(position[0] + 1, position[1]), (position[0] - 1, position[1]), (position[0], position[1]+1), (position[0], position[1]-1)] if position_valide(le_plateau, pos))
 
+def voisins_chemin(le_plateau, position):
+    """Renvoie l'ensemble des positions cases voisines accessibles de la position renseignées
+       Une case accessible est une case qui est sur le plateau et qui n'est pas un mur
+    Args:
+        le_plateau (plateau): un plateau de jeu
+        position (tuple): un tuple de deux entiers de la forme (no_ligne, no_colonne) 
+
+    Returns:
+        set: l'ensemble des positions des cases voisines accessibles
+    """
+    return set(pos for pos in [(position[0] + 1, position[1]), (position[0] - 1, position[1]), (position[0], position[1]+1), (position[0], position[1]-1)] if est_sur_le_plateau(le_plateau, pos))
 
 def pos_par_valeur(le_plateau, valeur):
     return set(pos for pos in les_positions_du_plateau(le_plateau) if get(le_plateau, pos) == valeur)
@@ -206,7 +217,7 @@ def fabrique_le_calque(le_plateau, position_depart):
 
 print()
 # print(fabrique_le_calque(dico_matrice, (4, 2)))
-print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
+print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 5))))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
@@ -224,16 +235,13 @@ def fabrique_chemin(le_plateau, position_depart, position_arrivee):
     pos = position_arrivee
     calque = fabrique_le_calque(le_plateau, position_depart)
     chemin = []
-    chemin.append(pos)
-    ajout = True
-    while ajout:
-        ajout = False
-        for voisin in voisins(calque, pos):
+    while pos != position_depart:
+        chemin.append(pos)
+        for voisin in voisins_chemin(calque, pos):
             if get(calque, voisin) == get(calque, pos) - 1:
                 pos = voisin
-                chemin.append(pos)
-                ajout = True
     return chemin
+
 print(fabrique_chemin(dico_matrice, (4, 5), (8, 8)))
 print(fabrique_chemin(dico_matrice, (5, 3), (8, 8)))
 
