@@ -1,7 +1,11 @@
 """
 Une implémentation des matrices 2D en python
 Détailler ici la modélisation choisie en donnant au moins un exemple
+
+Dictionnaire comportant la position sous la forme : (no_ligne, no_colonne) = valeur de la position
+La position en clé est associée à la valeur de la position
 """
+
 
 def new_matrice(nb_lignes, nb_colonnes, valeur_par_defaut=0):
     """Construit et une nouvelle matrice
@@ -80,7 +84,7 @@ def set_val(matrice, ligne, colonne, new_val):
     matrice[2][ligne, colonne] = new_val
 
 
-def affiche(matrice):
+def affiche2(matrice):
     """Affiche la matrice sur la sortie standard
 
     Args:
@@ -103,7 +107,39 @@ def affiche(matrice):
                     print('', end='')
         print()
 
-        
+def affiche_ligne_separatrice(la_matrice, taille_cellule=4):
+    """fonction auxilliaire qui permet d'afficher (dans le terminal)
+    une ligne séparatrice
+
+    Args:
+        la_matrice : une matrice
+        taille_cellule (int, optional): la taille d'une cellule. Defaults to 4.
+    """
+    print()
+    for _ in range(get_nb_colonnes(la_matrice) + 1):
+        print('-'*taille_cellule+'+', end='')
+    print()
+
+
+def affiche(la_matrice, taille_cellule=4):
+    """permet d'afficher une matrice dans le terminal
+
+    Args:
+        la_matrice : une matrice
+        taille_cellule (int, optional): la taille d'une cellule. Defaults to 4.
+    """
+    nb_colonnes = get_nb_colonnes(la_matrice)
+    nb_lignes = get_nb_lignes(la_matrice)
+    print(' '*taille_cellule+'|', end='')
+    for i in range(nb_colonnes):
+        print(str(i).center(taille_cellule) + '|', end='')
+    affiche_ligne_separatrice(la_matrice, taille_cellule)
+    for i in range(nb_lignes):
+        print(str(i).rjust(taille_cellule) + '|', end='')
+        for j in range(nb_colonnes):
+            print(str(get_val(la_matrice, i, j)).rjust(taille_cellule) + '|', end='')
+        affiche_ligne_separatrice(la_matrice, taille_cellule)
+    print()
 
 #-----------------------------------------
 # entrées sorties dans des fichiers

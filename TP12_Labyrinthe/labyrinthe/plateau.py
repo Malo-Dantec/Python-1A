@@ -35,8 +35,12 @@ def init(nom_fichier="./labyrinthe1.txt"):
     matrice.set_val(ma_matrice, 0, 0, PERSONNAGE)
     matrice.set_val(ma_matrice, matrice.get_nb_lignes(ma_matrice)-1, matrice.get_nb_colonnes(ma_matrice)-1, FANTOME)
     return ma_matrice
-print(matrice.affiche(init()))
+# print(matrice.affiche(init()))
+# print(matrice.affiche2(init()))
 
+
+def les_positions_du_plateau(le_plateau):
+    return sorted(le_plateau[2])
 
 def est_sur_le_plateau(le_plateau, position):
     """Indique si la position est bien sur le plateau
@@ -48,7 +52,7 @@ def est_sur_le_plateau(le_plateau, position):
     Returns:
         [boolean]: True si la position est bien sur le plateau
     """
-    if position in le_plateau[2].keys():
+    if position in les_positions_du_plateau(le_plateau):
         return True
     return False
 
@@ -171,7 +175,7 @@ def voisins(le_plateau, position):
 
 
 def pos_par_valeur(le_plateau, valeur):
-    return set(pos for pos in le_plateau[2].keys() if le_plateau[2][pos] == valeur)
+    return set(pos for pos in les_positions_du_plateau(le_plateau) if get(le_plateau, pos) == valeur)
 
 
 def fabrique_le_calque(le_plateau, position_depart):
@@ -202,7 +206,7 @@ def fabrique_le_calque(le_plateau, position_depart):
 
 print()
 # print(fabrique_le_calque(dico_matrice, (4, 2)))
-# print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
+print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 2))))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
@@ -219,19 +223,19 @@ def fabrique_chemin(le_plateau, position_depart, position_arrivee):
     """
     pos = position_arrivee
     calque = fabrique_le_calque(le_plateau, position_depart)
-    print(calque)
     chemin = []
-    while pos != position_depart:
-        chemin.append(pos)
-        # print("a")
+    chemin.append(pos)
+    ajout = True
+    while ajout:
+        ajout = False
         for voisin in voisins(calque, pos):
-            print(voisin)
             if get(calque, voisin) == get(calque, pos) - 1:
                 pos = voisin
-                # print("c")
+                chemin.append(pos)
+                ajout = True
     return chemin
-
-print(fabrique_chemin(dico_matrice, (4, 2), (8, 8)))
+print(fabrique_chemin(dico_matrice, (4, 5), (8, 8)))
+print(fabrique_chemin(dico_matrice, (5, 3), (8, 8)))
 
 def deplace_fantome(le_plateau, fantome, personnage):
     """déplace le FANTOME sur le plateau vers le personnage en prenant le chemin le plus court
