@@ -257,7 +257,10 @@ def deplace_fantome(le_plateau, fantome, personnage):
         [tuple]: la nouvelle position du FANTOME
     """
     chemin = fabrique_chemin(le_plateau, personnage, fantome)
-    matrice.set_val(le_plateau, chemin[1][0], chemin[1][1], FANTOME)
-    matrice.set_val(le_plateau, fantome[0], fantome[1], COULOIR)
-    return chemin[1]
+    if len(chemin) >= 2:
+        matrice.set_val(le_plateau, chemin[1][0], chemin[1][1], FANTOME)
+        matrice.set_val(le_plateau, fantome[0], fantome[1], COULOIR)
+        return chemin[1]
+    return fantome
 print(deplace_fantome(dico_matrice, (8,8), (7,4)))
+print(deplace_fantome(dico_matrice, (8,8), (8,8)))
