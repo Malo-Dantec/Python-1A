@@ -42,6 +42,7 @@ def init(nom_fichier="./labyrinthe1.txt"):
 def les_positions_du_plateau(le_plateau):
     return sorted(le_plateau[2])
 
+
 def est_sur_le_plateau(le_plateau, position):
     """Indique si la position est bien sur le plateau
 
