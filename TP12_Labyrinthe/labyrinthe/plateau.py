@@ -264,3 +264,7 @@ def deplace_fantome(le_plateau, fantome, personnage):
     return fantome
 print(deplace_fantome(dico_matrice, (8,8), (7,4)))
 print(deplace_fantome(dico_matrice, (8,8), (8,8)))
+print(deplace_fantome(dico_matrice, (8,8), (5,8)))
+print(deplace_fantome(dico_matrice, (8,8), (2,1)))
+print(deplace_fantome(dico_matrice, (8,8), (6,6)))
+

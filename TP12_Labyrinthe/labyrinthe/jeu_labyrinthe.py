@@ -90,7 +90,7 @@ def joue():
     personnage = (0, 0)
     fantome = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
     sortie = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
-    affichage_graphique = None
+    affichage_graphique = matrice_graphique.MatriceGraphique(mon_plateau)
     affiche_jeu(mon_plateau, affichage_graphique)
     quitte = False
     while not quitte:
