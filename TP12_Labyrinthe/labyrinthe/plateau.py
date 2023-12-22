@@ -242,8 +242,8 @@ def fabrique_chemin(le_plateau, position_depart, position_arrivee):
                 pos = voisin
     return chemin
 
-print(fabrique_chemin(dico_matrice, (4, 5), (8, 8)))
-print(fabrique_chemin(dico_matrice, (5, 3), (8, 8)))
+# print(fabrique_chemin(dico_matrice, (4, 5), (8, 8)))
+# print(fabrique_chemin(dico_matrice, (5, 3), (8, 8)))
 
 def deplace_fantome(le_plateau, fantome, personnage):
     """déplace le FANTOME sur le plateau vers le personnage en prenant le chemin le plus court
@@ -256,4 +256,8 @@ def deplace_fantome(le_plateau, fantome, personnage):
     Returns:
         [tuple]: la nouvelle position du FANTOME
     """
-    ...
+    chemin = fabrique_chemin(le_plateau, personnage, fantome)
+    matrice.set_val(le_plateau, chemin[1][0], chemin[1][1], FANTOME)
+    matrice.set_val(le_plateau, fantome[0], fantome[1], COULOIR)
+    return chemin[1]
+print(deplace_fantome(dico_matrice, (8,8), (7,4)))

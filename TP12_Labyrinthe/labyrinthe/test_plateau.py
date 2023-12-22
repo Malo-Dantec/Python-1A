@@ -93,12 +93,12 @@ def test_fabrique_chemin():
                                                                    (7, 5), (7, 4), (7, 3), (6, 3)]
 
 
-# def test_deplace_fantome():
-#     le_plateau = plateau.init()
-#     assert plateau.deplace_fantome(le_plateau, (8, 8), (0, 0)) == (8, 7)
-#     assert plateau.contient_fantome(le_plateau, (8, 7))
-#     assert not plateau.contient_fantome(le_plateau, (8, 8))
-#     le_plateau = plateau.init()
-#     assert plateau.deplace_fantome(le_plateau, (8, 8), (7, 4)) == (8, 7)
-#     assert plateau.deplace_fantome(le_plateau, (7, 4), (8, 8)) == (7, 5)
-#     assert plateau.deplace_fantome(le_plateau, (4, 4), (4, 4)) == (4, 4)
+def test_deplace_fantome():
+    le_plateau = plateau.init()
+    assert plateau.deplace_fantome(le_plateau, (8, 8), (0, 0)) == (8, 7)
+    assert plateau.contient_fantome(le_plateau, (8, 7))
+    assert not plateau.contient_fantome(le_plateau, (8, 8))
+    le_plateau = plateau.init()
+    assert plateau.deplace_fantome(le_plateau, (8, 8), (7, 4)) == (8, 7)
+    assert plateau.deplace_fantome(le_plateau, (7, 4), (8, 8)) == (7, 5)
+    assert plateau.deplace_fantome(le_plateau, (4, 4), (4, 4)) == (4, 4)
