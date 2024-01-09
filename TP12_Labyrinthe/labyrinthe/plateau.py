@@ -216,9 +216,9 @@ def fabrique_le_calque(le_plateau, position_depart):
         nombre += 1
     return calque
 
-print()
+# print()
 # print(fabrique_le_calque(dico_matrice, (4, 2)))
-print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 5))))
+# print(matrice.affiche(fabrique_le_calque(dico_matrice, (4, 5))))
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
@@ -263,9 +263,9 @@ def deplace_fantome(le_plateau, fantome, personnage):
         matrice.set_val(le_plateau, fantome[0], fantome[1], COULOIR)
         return chemin[1]
     return fantome
-print(deplace_fantome(dico_matrice, (8,8), (7,4)))
-print(deplace_fantome(dico_matrice, (8,8), (8,8)))
-print(deplace_fantome(dico_matrice, (8,8), (5,8)))
-print(deplace_fantome(dico_matrice, (8,8), (2,1)))
-print(deplace_fantome(dico_matrice, (8,8), (6,6)))
+# print(deplace_fantome(dico_matrice, (8,8), (7,4)))
+# print(deplace_fantome(dico_matrice, (8,8), (8,8)))
+# print(deplace_fantome(dico_matrice, (8,8), (5,8)))
+# print(deplace_fantome(dico_matrice, (8,8), (2,1)))
+# print(deplace_fantome(dico_matrice, (8,8), (6,6)))
 

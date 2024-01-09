@@ -83,10 +83,12 @@ def fin_du_jeu(gagne, affichage_graphique=None):
     affiche_message(message, affichage_graphique)
     lance_menu()
 
+def choix_du_plateau():
+    return input("Entrer le nom d'un labyrinthe : ")
 
 def joue():
     """Permet de lancer le jeu du labyrinthe et y jouer"""
-    mon_plateau = plateau.init()
+    mon_plateau = plateau.init(choix_du_plateau())
     personnage = (0, 0)
     fantome = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
     sortie = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
