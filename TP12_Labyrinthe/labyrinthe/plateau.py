@@ -40,9 +40,8 @@ def init(nom_fichier="./labyrinthe1.txt"):
 
 
 def les_positions_du_plateau(le_plateau):
-    return sorted(le_plateau[2])
-
-
+    return le_plateau[2]
+# print(les_positions_du_plateau(dico_matrice))
 def est_sur_le_plateau(le_plateau, position):
     """Indique si la position est bien sur le plateau
 

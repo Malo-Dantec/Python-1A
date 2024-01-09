@@ -86,9 +86,17 @@ def fin_du_jeu(gagne, affichage_graphique=None):
 def choix_du_plateau():
     return input("Entrer le nom d'un labyrinthe : ")
 
+
 def joue():
     """Permet de lancer le jeu du labyrinthe et y jouer"""
-    mon_plateau = plateau.init(choix_du_plateau())
+    existe = False
+    while not existe:
+        try:
+            mon_plateau = plateau.init(choix_du_plateau())
+            existe = True
+        except:
+            print("Le fichier n'exite pas.")
+            existe = False
     personnage = (0, 0)
     fantome = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
     sortie = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
