@@ -13,7 +13,11 @@ def mon_pokedex():
             'Abo': ({'Poison'}, 4, 2, 6)}
 
 def plus_forte_attaque(pokedex):
-    ...
+    def critere(nom):
+        return pokedex[nom][1]
+    le_plus_fort = max(pokedex, key=critere)
+    (familles, attaque, defense, poids) = pokedex[le_plus_fort]
+    return (le_plus_fort, familles, attaque, defense, poids)
 
 
 def tri_selon_defense(pokedex):

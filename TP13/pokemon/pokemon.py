@@ -16,16 +16,29 @@ def get_attaque(pokemon):
 
 
 def plus_forte_attaque(pokedex):
-    ...
+    def atq(pokemon):
+        return pokemon[2]
+    return sorted(pokedex, key=atq)[-1]
 
 
 def tri_selon_defense(pokedex):
-    ...
+    def defense(pokemon):
+        return pokemon[3]
+    tri = sorted(pokedex, key=defense)
+    poke_tri = []
+    for poke in tri:
+        poke_tri.append(poke[0])
+    return poke_tri
 
 
 def plus_petite_force(pokedex):
-    ...
+    def force(pokemon):
+        return pokemon[2] + pokemon[3]
+    return sorted(pokedex, key=force)[0][0]
 
 
 def tri_selon_diversite(pokedex):
-    ...
+    def diversite(pokemon):
+        return len(pokemon[1])
+    m = sorted(pokedex, key=get_attaque)
+    return sorted(m, key=diversite)
