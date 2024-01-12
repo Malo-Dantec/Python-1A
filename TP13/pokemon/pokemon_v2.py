@@ -21,13 +21,26 @@ def plus_forte_attaque(pokedex):
 
 
 def tri_selon_defense(pokedex):
-    ...
+    def defense(nom):
+        return pokedex[nom][2]
+    return sorted(pokedex, key=defense)
 
 
 def plus_petite_force(pokedex):
-    ...
+    def force(pokemon):
+        return pokedex[pokemon][1] + pokedex[pokemon][2]
+    return min(pokedex, key=force)
 
 
 def tri_selon_diversite(pokedex):
-    ...
+    def atq(pokemon):
+        return pokedex[pokemon][1]
+    def types(pokemon):
+        return len(pokedex[pokemon][0])
+    noms = sorted(sorted(pokedex, key=atq), key=types)
+    res = []
+    for poke in noms:
+        (familles, attaque, defense, poids) = pokedex[poke]
+        res.append((poke, familles, attaque, defense, poids))
+    return res
 
