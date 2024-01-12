@@ -1,4 +1,4 @@
-import pokemon_v2 as pokemon
+import pokemon_v3 as pokemon
 
 def test_plus_forte_attaque():
     exemple = pokemon.mon_pokedex()
