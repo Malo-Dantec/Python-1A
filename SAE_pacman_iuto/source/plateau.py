@@ -248,7 +248,7 @@ def Plateau(plan):
     plateau["col"] = nb_colonnes
 
     return plateau
-
+print(Plateau(open("./cartes/test3.txt").read()))
 
 def set_case(plateau, pos, une_case):
     """remplace la case qui se trouve en position pos du plateau par une_case
@@ -273,8 +273,7 @@ def enlever_pacman(plateau, pacman, pos):
     Returns:
         bool: True si l'opération s'est bien déroulée, False sinon
     """
-    la_case = get_case(plateau, pos)
-    return case.prendre_pacman(la_case, pacman)
+    return case.prendre_pacman(get_case(plateau, pos), pacman)
 
 
 def enlever_fantome(plateau, fantome, pos):
@@ -288,8 +287,7 @@ def enlever_fantome(plateau, fantome, pos):
     Returns:
         bool: True si l'opération s'est bien déroulée, False sinon
     """
-    la_case = get_case(plateau, pos)
-    return case.prendre_fantome(la_case, fantome)
+    return case.prendre_fantome(get_case(plateau, pos), fantome)
 
 
 def prendre_objet(plateau, pos):
@@ -304,8 +302,7 @@ def prendre_objet(plateau, pos):
         int: l'entier représentant l'objet qui se trouvait sur la case.
         const.AUCUN indique aucun objet
     """
-    la_case = get_case(plateau, pos)
-    return case.prendre_objet(la_case)
+    return case.prendre_objet(get_case(plateau, pos))
 
         
 def deplacer_pacman(plateau, pacman, pos, direction, passemuraille=False):
