@@ -248,7 +248,7 @@ def Plateau(plan):
     plateau["col"] = nb_colonnes
 
     return plateau
-print(Plateau(open("./cartes/test3.txt").read()))
+
 
 def set_case(plateau, pos, une_case):
     """remplace la case qui se trouve en position pos du plateau par une_case
@@ -503,8 +503,12 @@ def analyse_plateau(plateau, pos, direction, distance_max):
                                     arret = False
     return distances
     
+pl = Plateau(open("./cartes/test3.txt").read())
+print(analyse_plateau(pl, (5,5), 'N', get_nb_colonnes(pl) * get_nb_lignes(pl)))
+print(analyse_plateau(pl, (5,5), 'E', get_nb_colonnes(pl) * get_nb_lignes(pl)))
+print(analyse_plateau(pl, (5,5), 'O', get_nb_colonnes(pl) * get_nb_lignes(pl)))
+print(analyse_plateau(pl, (5,5), 'S', get_nb_colonnes(pl) * get_nb_lignes(pl)))
 
-    
 def intersection(direction):
     """
     calcule la direction perpendiculaire à la direction indiquée
